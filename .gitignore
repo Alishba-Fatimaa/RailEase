@@ -1,0 +1,11 @@
+
+# Generated booking records
+bookings.txt
+
+# Compiled executables
+*.exe
+*.out
+
+# IDE and editor files
+.vscode/
+.idea/
