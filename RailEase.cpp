@@ -14,9 +14,28 @@ void printLine(char ch = '=') {
 
 void printHeading(const string& heading) {
     printLine('=');
-    int leftPadding = (LINE_WIDTH - static_cast<int>(heading.length())) / 2;
-    if (leftPadding < 0) leftPadding = 0;
-    cout << string(leftPadding, ' ') << heading << '\n';
+
+    size_t pos = heading.find('\n');
+
+    if (pos != string::npos) {
+        string first = heading.substr(0, pos);
+        string second = heading.substr(pos + 1);
+
+        int padding1 = (LINE_WIDTH - first.length()) / 2;
+        int padding2 = (LINE_WIDTH - second.length()) / 2;
+
+        cout << string(padding1 > 0 ? padding1 : 0, ' ')
+             << first << '\n';
+
+        cout << string(padding2 > 0 ? padding2 : 0, ' ')
+             << second << '\n';
+    } else {
+        int padding = (LINE_WIDTH - heading.length()) / 2;
+
+        cout << string(padding > 0 ? padding : 0, ' ')
+             << heading << '\n';
+    }
+
     printLine('=');
 }
 
@@ -80,8 +99,7 @@ int main(){
     int choice;
     do{
         cout << "\n";
-        printHeading("RailEase — A Railway Ticketing Application in C++ TRAIN TICKET BOOKING SYSTEM");
-         printHeading("TRAIN TICKET BOOKING SYSTEM");
+         printHeading("          RailEase         \n TRAIN TICKET BOOKING SYSTEM");
         cout << "  1.  View Trains\n";
         cout << "  2.  User Menu\n";
         cout << "  3.  View Ticket\n";
